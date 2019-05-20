@@ -3,8 +3,9 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 from vk_api.utils import get_random_id
 from user_list import *
 from vk_sender.keyboard import *
+from schedule import ssender
 
-#клавиатура в формате json
+# клавиатура в формате json
 keyboard = {
     'one_time': True,
     'buttons': [
@@ -18,6 +19,7 @@ keyboard = {
     ]
 }
 
+
 def main():
     users = {}
     vk_session = vk_api.VkApi(
@@ -26,7 +28,7 @@ def main():
     longpol = VkLongPoll(vk_session)
     for event in longpol.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
-            if not(user_checker(str(event.user_id),"D:\\Code\\Python\\VKBOT\\folder.txt")):
+            if not (user_checker(str(event.user_id), "D:\\Code\\Python\\VKBOT\\folder.txt")):
                 flag1 = True
                 vk.messages.send(
                     user_id=event.user_id,
@@ -44,16 +46,29 @@ def main():
                                 random_id=get_random_id(),
                                 message='Ваша группа {}'.format(event1.text.upper())
                             )
-                            flag1 =False
+                            flag1 = False
                             break
 
             if event.text.lower() == 'расписание':
                 vk.messages.send(
                     user_id=event.user_id,
                     random_id=get_random_id(),
-                    message='zyx',
-                    keyboard = get_keyboard(keyboard)
+                    message='Конкретнее...',
+                    keyboard=get_keyboard(keyboard)
                 )
+                flag1 = True
+                while flag1:
+                    longpol1 = VkLongPoll(vk_session)
+                    for event1 in longpol1.listen():
+                        if event1.type == VkEventType.MESSAGE_NEW and event1.to_me:
+                            if 'На сегодня' == event1.text:
+                                vk.messages.send(
+                                user_id=event.user_id,
+                                random_id=get_random_id(),
+                                message=ssender.thisday(get_group(event1.user_id, "D:\\Code\\Python\\VKBOT\\folder.txt")),
+                                )
+                                flag1 = False
+                                break
 
 
 if __name__ == main():

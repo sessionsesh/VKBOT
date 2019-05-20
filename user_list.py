@@ -22,4 +22,11 @@ def user_checker(user_id, folder):
         return False
 
 
+def get_group(user_id, folder):
+    with open(folder, 'rb') as inp:
+        d = pickle.load(inp)
+    for each in d.keys():
+        if str(user_id).lower() == each.lower():
+            res = d[each]
+    return res
 print(user_checker(str(482658803), 'D:\\Code\\Python\\VKBOT\\folder.txt'))

@@ -1,5 +1,6 @@
 import json
 
+
 def get_button(label, color, payload=''):
     return {
         'action': {
@@ -9,6 +10,7 @@ def get_button(label, color, payload=''):
         },
         'color': color
     }
+
 
 def get_keyboard(keyboard):
     res = json.dumps(keyboard, ensure_ascii=False).encode('utf-8')
@@ -26,7 +28,3 @@ def get_keyboard(keyboard):
 #
 #     ]
 # }
-
-
-
-
