@@ -4,6 +4,7 @@ from vk_api.utils import get_random_id
 from user_list import *
 from vk_sender.keyboard import *
 from schedule import ssender
+import datetime
 
 # клавиатура в формате json
 keyboard = {
@@ -53,7 +54,7 @@ def main():
                 vk.messages.send(
                     user_id=event.user_id,
                     random_id=get_random_id(),
-                    message='Конкретнее...',
+                    message='Конкретнее...\nВыбери из меню ;)',
                     keyboard=get_keyboard(keyboard)
                 )
                 flag1 = True
@@ -63,12 +64,57 @@ def main():
                         if event1.type == VkEventType.MESSAGE_NEW and event1.to_me:
                             if 'На сегодня' == event1.text:
                                 vk.messages.send(
-                                user_id=event.user_id,
-                                random_id=get_random_id(),
-                                message=ssender.thisday(get_group(event1.user_id, "D:\\Code\\Python\\VKBOT\\folder.txt")),
+                                    user_id=event.user_id,
+                                    random_id=get_random_id(),
+                                    message=ssender.thisday(
+                                        get_group(event1.user_id, "D:\\Code\\Python\\VKBOT\\folder.txt"),
+                                        datetime.datetime.now()
+                                    ),
                                 )
                                 flag1 = False
                                 break
+                            elif 'На завтра' == event1.text:
+                                vk.messages.send(
+                                    user_id=event.user_id,
+                                    random_id=get_random_id(),
+                                    message=ssender.thisday(
+                                        get_group(event1.user_id, "D:\\Code\\Python\\VKBOT\\folder.txt"),
+                                        datetime.datetime.now() + datetime.timedelta(days=1)
+                                    )
+                                )
+                                flag1 = False
+                                break
+                            elif 'На эту неделю' == event1.text:
+                                vk.messages.send(
+                                    user_id=event.user_id,
+                                    random_id=get_random_id(),
+                                    message=ssender.thisweek(
+                                        get_group(event1.user_id, "D:\\Code\\Python\\VKBOT\\folder.txt"),
+                                        datetime.datetime.now()
+                                    )
+                                )
+                                flag1 = False
+                                break
+                            else:
+                                vk.messages.send(
+                                    user_id=event.user_id,
+                                    random_id=get_random_id(),
+                                    message='Пока не доступно.'
+                                )
+                                flag1 = False
+                                break
+            if 'уме' in event.text.lower() or 'можешь' in event.text.lower():
+                vk.messages.send(
+                    user_id=event.user_id,
+                    random_id=get_random_id(),
+                    message='Много чего :)\nДоступные команды: "расписание", "привет"'
+                )
+            if 'привет' in event.text.lower():
+                vk.messages.send(
+                    user_id=event.user_id,
+                    random_id=get_random_id(),
+                    message='Привет, {}!'.format(vk.users.get(user_id=event.user_id)[0]['first_name'])
+                )
 
 
 if __name__ == main():

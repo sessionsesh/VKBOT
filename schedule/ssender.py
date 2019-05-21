@@ -2,8 +2,9 @@ import datetime
 from schedule.sparser import *
 from helpers import *
 
-
-def thisday(group, wk_day=datetime.datetime.today().weekday()):  # 0 - понедельник
+# расписание на определенный день недели
+def thisday(group, wk_day):  # 0 - понедельник
+    wk_day = wk_day.weekday()
     if checkPattern(group) != 'mistake in group name.':
         count = 0
         for each in range(len(group_list)):
@@ -53,4 +54,12 @@ def thisday(group, wk_day=datetime.datetime.today().weekday()):  # 0 - поне�
     # endregion
     return message
 
-print(thisday("ИКБО-10-18"))
+# расписание на вю неделю
+def thisweek(group, date):
+    message = ''
+    mon = make_monday(date)
+    for i in range(6):  # 0 1 2 3 4 5 6
+        message += thisday(group ,mon + datetime.timedelta(days = i)) +'\n'
+    return message
+
+#print(thisday("ИКБО-10-18"))
