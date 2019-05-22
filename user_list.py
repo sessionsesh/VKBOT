@@ -29,4 +29,4 @@ def get_group(user_id, folder):
         if str(user_id).lower() == each.lower():
             res = d[each]
     return res
-print(user_checker(str(482658803), 'D:\\Code\\Python\\VKBOT\\folder.txt'))
+#print(user_checker(str(482658803), 'D:\\Code\\Python\\VKBOT\\folder.txt'))

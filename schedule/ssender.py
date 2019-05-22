@@ -15,7 +15,7 @@ def thisday(group, wk_day):  # 0 - понедельник
     else:
         return 'mistake in group name.'
     message = ''
-    wk_num = 1  # поменять на функцию определения чётной и нечётной недели
+    wk_num = 1  # поменять на функцию определения чётной и нечётной недели !!!
     #  region 0-6
     d = ''
     list = {0: "MON", 1: "TUE", 2: "WED", 3: "THU", 4: "FRI", 5: "SAT", 6: "SUN"}

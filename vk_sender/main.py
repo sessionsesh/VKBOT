@@ -5,6 +5,7 @@ from user_list import *
 from vk_sender.keyboard import *
 from schedule import ssender
 import datetime
+import os
 
 # клавиатура в формате json
 keyboard = {
@@ -20,6 +21,7 @@ keyboard = {
     ]
 }
 
+only_for_folder_creating_heh = open('D:\\Code\\Python\\VKBOT\\folder.txt', 'wb')
 
 def main():
     users = {}
@@ -95,11 +97,20 @@ def main():
                                 )
                                 flag1 = False
                                 break
+                            elif 'На следующую неделю' == event1.text:
+                                vk.messages.send(
+                                    user_id=event.user_id,
+                                    random_id=get_random_id(),
+                                    message=ssender.thisweek(
+                                        get_group(event1.user_id, "D:\\Code\\Python\\VKBOT\\folder.txt"),
+                                        datetime.datetime.now()+datetime.timedelta(weeks=1)
+                                    )
+                                )
                             else:
                                 vk.messages.send(
                                     user_id=event.user_id,
                                     random_id=get_random_id(),
-                                    message='Пока не доступно.'
+                                    message='Такой функции нет.'
                                 )
                                 flag1 = False
                                 break
