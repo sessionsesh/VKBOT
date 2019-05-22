@@ -21,7 +21,7 @@ keyboard = {
     ]
 }
 
-only_for_folder_creating_heh = open('D:\\Code\\Python\\VKBOT\\folder.txt', 'wb')
+only_for_testing = open('D:\\Code\\Python\\VKBOT\\folder.txt', 'wb')
 
 def main():
     users = {}
@@ -70,7 +70,7 @@ def main():
                                     random_id=get_random_id(),
                                     message=ssender.thisday(
                                         get_group(event1.user_id, "D:\\Code\\Python\\VKBOT\\folder.txt"),
-                                        datetime.datetime.now()
+                                        datetime.date.today()
                                     ),
                                 )
                                 flag1 = False
@@ -81,7 +81,7 @@ def main():
                                     random_id=get_random_id(),
                                     message=ssender.thisday(
                                         get_group(event1.user_id, "D:\\Code\\Python\\VKBOT\\folder.txt"),
-                                        datetime.datetime.now() + datetime.timedelta(days=1)
+                                        datetime.date.today() + datetime.timedelta(days=1)
                                     )
                                 )
                                 flag1 = False
@@ -92,7 +92,7 @@ def main():
                                     random_id=get_random_id(),
                                     message=ssender.thisweek(
                                         get_group(event1.user_id, "D:\\Code\\Python\\VKBOT\\folder.txt"),
-                                        datetime.datetime.now()
+                                        datetime.date.today()
                                     )
                                 )
                                 flag1 = False
@@ -103,7 +103,7 @@ def main():
                                     random_id=get_random_id(),
                                     message=ssender.thisweek(
                                         get_group(event1.user_id, "D:\\Code\\Python\\VKBOT\\folder.txt"),
-                                        datetime.datetime.now()+datetime.timedelta(weeks=1)
+                                        datetime.date.today()+datetime.timedelta(weeks=1)
                                     )
                                 )
                             else:

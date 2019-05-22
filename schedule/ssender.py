@@ -3,8 +3,8 @@ from schedule.sparser import *
 from helpers import *
 
 # расписание на определенный день недели
-def thisday(group, wk_day):  # 0 - понедельник
-    wk_day = wk_day.weekday()
+def thisday(group, date):  # 0 - понедельник
+    wk_day = date.weekday()
     if checkPattern(group) != 'mistake in group name.':
         count = 0
         for each in range(len(group_list)):
@@ -15,7 +15,9 @@ def thisday(group, wk_day):  # 0 - понедельник
     else:
         return 'mistake in group name.'
     message = ''
-    wk_num = 1  # поменять на функцию определения чётной и нечётной недели !!!
+    if wk_cnt(date):
+        wk_num = 1
+    else: wk_num = 0
     #  region 0-6
     d = ''
     list = {0: "MON", 1: "TUE", 2: "WED", 3: "THU", 4: "FRI", 5: "SAT", 6: "SUN"}
@@ -62,4 +64,5 @@ def thisweek(group, date):
         message += thisday(group ,mon + datetime.timedelta(days = i)) +'\n'
     return message
 
-#print(thisday("ИКБО-10-18"))
+
+print(thisday('ИКБО-10-18',datetime.date(2019,9,15)))
