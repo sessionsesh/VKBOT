@@ -106,7 +106,6 @@ for col_index in range(num_cols):
 # endregion
 
 
-
 def group_checker(group):
     for each in group_list:
         if group.lower() == each.lower():

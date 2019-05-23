@@ -15,9 +15,10 @@ def thisday(group, date):  # 0 - понедельник
     else:
         return 'mistake in group name.'
     message = ''
-    if wk_cnt(date):
+    if week(date) % 2 == 0:
         wk_num = 1
-    else: wk_num = 0
+    else:
+        wk_num = 0
     #  region 0-6
     d = ''
     list = {0: "MON", 1: "TUE", 2: "WED", 3: "THU", 4: "FRI", 5: "SAT", 6: "SUN"}
@@ -25,7 +26,7 @@ def thisday(group, date):  # 0 - понедельник
         if i == wk_day:
             d = list[i]
             break
-    message = 'Расписание на {} \n'.format(datetime.datetime.today())
+    message = 'Расписание на {} \n'.format(date.strftime('%d-%m-%Y'))
     for i in range(6):
         count = 0
         subject = groups[group][d][i][wk_num]['subject']
@@ -64,5 +65,4 @@ def thisweek(group, date):
         message += thisday(group ,mon + datetime.timedelta(days = i)) +'\n'
     return message
 
-
-print(thisday('ИКБО-10-18',datetime.date(2019,9,15)))
+#print(thisweek('ИКБО-10-18', datetime.date.today()))

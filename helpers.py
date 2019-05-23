@@ -3,24 +3,11 @@ import datetime
 
 
 #  Четная/нечётная неделя
-def wk_cnt(date):
-    cur_y = int(date.strftime('%Y'))
-    if int(date.strftime('%m')) < 9:
-        sep = datetime.date(cur_y, 9, 1) - datetime.timedelta(days=365)
-    else:
-        sep = datetime.datetime(cur_y, 9, 1)
-    day = 0
-    weeks = 1
-    x = sep + datetime.timedelta(days=day)
-    while x != date:
-        x = sep + datetime.timedelta(days=day)
-        if day % 7 == 0:
-            weeks += 1
-        day += 1
-    if weeks % 2 == 0:
-        return True
-    else:
-        return False
+def week(date):
+    bsc = (6, 35)
+    cur_wk = int(date.strftime('%V'))
+    wk = cur_wk - bsc[int(date.month) >= 8]
+    return wk
 
 
 # возвращает понедельник полученной даты
@@ -37,4 +24,12 @@ def checkPattern(str):
         return True
     else:
         return False
+
+def getPattern(str):
+    pattern = r'\D\D\D\D-\d\d-\d\d'
+    if re.search(pattern, str):
+        return re.search(pattern, str)[0].upper()
+    else:
+        return 'mistake'
+
 
