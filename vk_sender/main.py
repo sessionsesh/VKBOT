@@ -7,7 +7,7 @@ from schedule import ssender
 import datetime
 from helpers import week
 import helpers
-
+from schedule import academ_parser
 # клавиатура в формате json
 keyboard = {
     'one_time': False,
@@ -24,7 +24,7 @@ keyboard = {
 
 # для других групп
 keyboard2 = {
-    'one_time': False,
+    'one_time': True,
     'buttons': [
         [get_button(label='На сегодня', color='positive')],
         [get_button(label='На завтра', color='negative')],
@@ -148,9 +148,11 @@ def main():
                 vk.messages.send(
                     user_id=event.user_id,
                     random_id=get_random_id(),
-                    message=ssender.thisday(helpers.getPattern(event.text), datetime.date.today())
+                    message=ssender.thisday(helpers.getPattern(event.text), datetime.date.today()),
+                    keyboard= get_keyboard(keyboard2)
                 )
                 continue
+
             else:
                 vk.messages.send(
                     user_id=event.user_id,
