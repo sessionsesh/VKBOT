@@ -21,7 +21,7 @@ keyboard = {
 
     ]
 }
-
+# TEST TEST
 # для других групп
 keyboard2 = {
     'one_time': True,
