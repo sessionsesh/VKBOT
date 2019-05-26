@@ -104,7 +104,7 @@ for col_index in range(num_cols):
             groups.update({group_cell: week})
             group_list.append(group_cell)
 # endregion
-print(groups)
+
 
 def group_checker(group):
     for each in group_list:

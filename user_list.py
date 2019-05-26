@@ -12,6 +12,11 @@ def din(folder):  # чтение из файла
         d = pickle.load(inp)
     return d
 
+def folder_checker(folder):
+    if os.stat(folder).st_size == 0:
+        return False
+    else:
+        return True
 
 def user_checker(user_id, folder):
     if os.stat(folder).st_size == 0:
@@ -29,4 +34,6 @@ def get_group(user_id, folder):
         if str(user_id).lower() == each.lower():
             res = d[each]
     return res
+
+
 #print(user_checker(str(482658803), 'D:\\Code\\Python\\VKBOT\\folder.txt'))

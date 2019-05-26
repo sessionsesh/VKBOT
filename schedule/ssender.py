@@ -3,8 +3,10 @@ from schedule.sparser import *
 from helpers import *
 
 # расписание на определенный день недели
-def thisday(group, date):  # 0 - понедельник
+def thisday(group, date):  # 0 1 2 3 4 5 6
     wk_day = date.weekday()
+    if wk_day == 6:
+        return 'fuck off! Today is sunday'
     if checkPattern(group) != 'mistake in group name.':
         count = 0
         for each in range(len(group_list)):

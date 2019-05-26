@@ -85,6 +85,8 @@ def find_academic(name, date):
     if not (check_acadeimc(name)):
         return 'academic name mistake'
     wk_day = date.weekday()
+    if wk_day == 6:
+        return "today is sunday"
     message = ''
     if helpers.week(date) % 2 == 0:
         wk_num = 1
@@ -116,6 +118,26 @@ def find_academic(name, date):
 
     return message
 
+def academ_counter(name):
+    count = 0
+    for each in academics:
+        if name.lower() in each.lower():
+            count+=1
+        if count > 1:
+            return False
+    return True
+
+def academ_week(name,date):
+    msg = ''
+    mon = helpers.make_monday(date)
+    if not check_acadeimc(name):
+        return 'academ name mistake'
+    for i in range(6):  # 0 1 2 3 4 5 6
+        msg += find_academic(name, mon + datetime.timedelta(days=i)) + '\n'
+    return msg
 # print(aca_sch[normal_academ('Сафрон')][dict[0]])
 
-print(find_academic(normal_academ('Сафрон'), datetime.date(2019,5,20)))
+#print(find_academic(normal_academ('Сафрон'), datetime.date(2019,5,20)))
+#print(aca_sch)
+
+academ_counter('Белова')

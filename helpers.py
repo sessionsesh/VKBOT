@@ -1,6 +1,6 @@
 import re
 import datetime
-
+from schedule.sparser import group_checker
 
 #  Четная/нечётная неделя
 def week(date):
@@ -25,6 +25,7 @@ def checkPattern(str):
     else:
         return False
 
+
 def getPattern(str):
     pattern = r'\D\D\D\D-\d\d-\d\d'
     if re.search(pattern, str):
@@ -33,3 +34,8 @@ def getPattern(str):
         return 'mistake'
 
 
+def group_is_right(group):
+   if checkPattern(group) and group_checker(group):
+       return True
+   else:
+       return False
