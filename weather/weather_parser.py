@@ -46,7 +46,8 @@ def wth_now():
     )
     info = response.json()
     # print(info)
-    msg += 'Погода в Москве: {}\nТемпература: {}℃\nВетер: {} м/c, {}\nДавление: {} мм рт. ст, влажность: {}%\n'.format(
+    msg += 'Погода в Москве: {}\nТемпература: {}℃\nВетер: {} м/c, ' \
+           '{}\nДавление: {} мм рт. ст, влажность: {}%\n'.format(
         make_rus(info['weather'][0]['main']),
         info['main']['temp'],
         info['wind']['speed'],
@@ -126,10 +127,6 @@ def wth_five():  # погода на пять дней
         params={'id': 524901, 'units': 'metric', 'APPID': api}
     )
     info = response.json()
-    # for i in info['list']:
-    #     if not date_is_today(i['dt_txt']):
-    #         msg += '{}\n'.format(i['dt_txt'])
-    # return msg
     day_temp = middle(info, 'day')
     night_temp = middle(info, 'evening')
     flag = 0
@@ -223,7 +220,7 @@ def today1():
     f = False
     count = 0
     for i in info['list']:
-        if not(date_is_today(i['dt_txt'])) and f:
+        if not (date_is_today(i['dt_txt'])) and f:
             if time_is(i['dt_txt'], 'night') and flag1:
                 msg += 'Ночь\nПогода:{}\nТемпература: {}℃\nВетер: {} м/c, {}\nДавление: {} мм рт. ст, влажность: {}%\n\n'.format(
                     make_rus(i['weather'][0]['main']),
@@ -325,7 +322,6 @@ def today_photo_1(vk_sesh):
     upload = VkUpload(vk_sesh)
     photo = upload.photo_messages(photos='D:\\Code\\Python\\VKBOT\\pcis3\\img.png')[0]
     return 'photo{}_{}'.format(photo['owner_id'], photo['id'])
-
 
 
 def today_photo(vk_sesh):

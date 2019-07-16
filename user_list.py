@@ -1,23 +1,17 @@
 import pickle
 import os
-
-
 def dout(d, folder):  # запись в файл
     with open(folder, 'wb') as out:
         pickle.dump(d, out)
-
-
 def din(folder):  # чтение из файла
     with open(folder, 'rb') as inp:
         d = pickle.load(inp)
     return d
-
 def folder_checker(folder):
     if os.stat(folder).st_size == 0:
         return False
     else:
         return True
-
 def user_checker(user_id, folder):
     if os.stat(folder).st_size == 0:
         return False
@@ -25,8 +19,6 @@ def user_checker(user_id, folder):
         return True
     else:
         return False
-
-
 def get_group(user_id, folder):
     with open(folder, 'rb') as inp:
         d = pickle.load(inp)
